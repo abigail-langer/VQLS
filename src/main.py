@@ -1,6 +1,8 @@
 from fs_ansatz import fixedStructureAnsatz
 from local_had_test import local_had_test
 from local_cost import psi_norm, cost_loc
+
+from qiskit.circuit import QuantumCircuit, Parameter, QuantumRegister, ClassicalRegister
 from qiskit.circuit.library import RealAmplitudes
 from qiskit.quantum_info.operators import Operator
 from qiskit.algorithms.optimizers import COBYLA
