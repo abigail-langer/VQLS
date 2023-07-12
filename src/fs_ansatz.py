@@ -1,4 +1,4 @@
-from qiskit.circuit import QuantumCircuit, Parameter, QuantumRegister, Classical
+from qiskit.circuit import QuantumCircuit, Parameter, QuantumRegister, ClassicalRegister
 
 
 def fixedStructureAnsatz(circ, qubitindices):
