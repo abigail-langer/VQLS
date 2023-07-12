@@ -33,14 +33,15 @@ def main():
     c = [1]
 
     cost_history = []
-    out = minimize(cost_loc, x0, method="COBYLA", options={'maxiter':200})
+    out = minimize(cost_loc, x0, args=(ansatz_circ, A, B, c, cost_history), method="COBYLA", options={'maxiter':200})
     print(out)
     print('end of results')
 
     x = np.arange(0,len(cost_history),1)
-    plt.scatter(x,cost_history, color="g")
+    plt.scatter(x, cost_history, color="g")
     plt.show()
 
+    x_fsa_str = out['x']
 
     #using RealAmplitudes
     nqubits=3
@@ -53,9 +54,11 @@ def main():
     print('initial ansatz for ra:\n', x0)
 
     cost_history = []
-    out = minimize(cost_loc, x0, method="COBYLA", options={'maxiter':200})
+    out = minimize(cost_loc(x0, ansatz_circ, A, B, c, cost_history), x0, method="COBYLA", options={'maxiter':200})
     print(out)
     print('end of results')
+
+    x_ra_str = out['x']
 
     x = np.arange(0,len(cost_history),1)
     plt.scatter(x,cost_history, color="g")
@@ -73,9 +76,8 @@ def main():
 
 
     #using fixedStructureAnsatz
-    x_fsa = [3.03497294,3.68059907,-0.10831805,1.21603981,1.08343375,2.66673045,
-             -0.11051581,1.16625124,2.30077884,0.96587777,2.61451164,0.90462484,
-             3.02522104,1.62499983,2.07045172]
+    print('params found using ra: ', x_fsa_str)
+    x_fsa = list(map(int, x_fsa_str.split(' ')))
 
 
     qr = QuantumRegister(nqubits, 'q')
@@ -87,8 +89,8 @@ def main():
 
 
     #using RealAmplitudes
-    x_ra = [2.24503078,1.21717133,2.38979191,0.51223279,1.29820821,1.896024,
-            2.44890952,-0.07307036,1.67421469,2.07174518,1.18755991,3.59931302]
+    print('params found using ra: ', x_ra_str)
+    x_ra = list(map(int, x_ra_str.split(' ')))
 
     qr = QuantumRegister(nqubits, 'q')
     temp2 = QuantumCircuit(qr)

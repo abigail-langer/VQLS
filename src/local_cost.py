@@ -1,6 +1,6 @@
 from local_had_test import local_had_test
 
-def psi_norm(params):
+def psi_norm(params, ansatz_circ, A, B, c):
     '''
     Inputs:
     type ansatz_circ: qiskit circuit object, ansatz circuit, n registers
@@ -18,7 +18,7 @@ def psi_norm(params):
     
     return abs(norm)
 
-def cost_loc(params):
+def cost_loc(params, ansatz_circ, A, B, c, cost_history):
     '''
     Inputs:
     type ansatz_circ: qiskit circuit object, ansatz circuit, n registers
@@ -37,7 +37,7 @@ def cost_loc(params):
 
     mu_sum = abs(mu_sum)
     
-    cost = 0.5 - 0.5 * mu_sum / (ansatz_circ.num_qubits * psi_norm(params))
+    cost = 0.5 - 0.5 * mu_sum / (ansatz_circ.num_qubits * psi_norm(params, ansatz_circ, A, B, c))
     
     print("Cost_L = {:9.7f}".format(cost))
     cost_history.append(cost)
