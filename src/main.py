@@ -54,7 +54,7 @@ def main():
     print('initial ansatz for ra:\n', x0)
 
     cost_history = []
-    out = minimize(cost_loc(x0, ansatz_circ, A, B, c, cost_history), x0, method="COBYLA", options={'maxiter':200})
+    out = minimize(cost_loc, x0, args=(ansatz_circ, A, B, c, cost_history), method="COBYLA", options={'maxiter':200})
     print(out)
     print('end of results')
 
