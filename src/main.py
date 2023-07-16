@@ -41,7 +41,7 @@ def main():
     plt.scatter(x, cost_history, color="g")
     plt.show()
 
-    x_fsa_str = out['x']
+    x_fsa = out['x']
 
     #using RealAmplitudes
     nqubits=3
@@ -58,7 +58,7 @@ def main():
     print(out)
     print('end of results')
 
-    x_ra_str = out['x']
+    x_ra = out['x']
 
     x = np.arange(0,len(cost_history),1)
     plt.scatter(x,cost_history, color="g")
@@ -77,7 +77,7 @@ def main():
 
     #using fixedStructureAnsatz
     print('params found using ra: ', x_fsa_str)
-    x_fsa = list(map(int, x_fsa_str.split(' ')))
+    x_fsa = x_fsa.tolist()
 
 
     qr = QuantumRegister(nqubits, 'q')
@@ -90,7 +90,7 @@ def main():
 
     #using RealAmplitudes
     print('params found using ra: ', x_ra_str)
-    x_ra = list(map(int, x_ra_str.split(' ')))
+    x_ra = x_ra.tolist()
 
     qr = QuantumRegister(nqubits, 'q')
     temp2 = QuantumCircuit(qr)
